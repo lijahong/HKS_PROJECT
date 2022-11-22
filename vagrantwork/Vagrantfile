@@ -1,0 +1,62 @@
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.env.enable
+  config.ssh.insert_key = false
+  VM_NAME = ENV['VM_NAME']
+  KEY_PAIR_NAME = ENV['KEY_PAIR_NAME']
+  MEMORY = ENV['MEMORY'].to_i
+  CPUS = ENV['CPUS'].to_i
+  IMAGE = ENV['IMAGE']
+  VM_COUNT = ENV['VM_COUNT'].to_i
+  M_IP = ENV['MIP']
+  P_IP = ENV['PIP']
+  M_PORT = ENV['MPORT'].to_i
+  A_PORT = ENV['APORT'].to_i
+  W_PORT = ENV['WPORT'].to_i
+  USERPATH = ENV['USERPATH']
+
+  config.vm.define "#{VM_NAME}_manager" do |cfg|
+    cfg.vm.box = "#{IMAGE}"
+    cfg.vm.host_name = "#{VM_NAME}manager"
+    cfg.vm.network "public_network", :dev => "br0", :mode => "bridge", :type => "bridge", :ip => "#{M_IP}"
+    cfg.vm.network "forwarded_port", guest: 22, host: "#{M_PORT}", auto_correct: true, id: "ssh"
+    cfg.vm.provider :libvirt do |libvirt|
+        libvirt.cpus =  "#{CPUS}".to_i
+        libvirt.memory = "#{MEMORY}".to_i
+    end
+    cfg.vm.network "private_network", ip: "#{P_IP}10"
+    cfg.vm.provision 'file', source: "/root/#{USERPATH}/#{KEY_PAIR_NAME}.pub", destination: "/home/vagrant/authorized_keys"
+    cfg.vm.provision 'file', source: "/root/vagrantwork/k8s/lb-config.yml" , destination: "/home/vagrant/lb-config.yml"
+    cfg.vm.provision 'shell', path: "/root/vagrantwork/setting/setting.sh"
+    cfg.vm.provision 'shell', path: "/root/vagrantwork/setting/setssh_default.sh"
+  end
+            
+  (1..VM_COUNT).each do |i|
+    config.vm.define "#{VM_NAME}_worker#{i}" do |cfg|
+      cfg.vm.box = "#{IMAGE}"
+      cfg.vm.network "forwarded_port", guest: 22, host: "#{W_PORT + i}", auto_correct: true, id: "ssh"
+      cfg.vm.provider :libvirt do |libvirt|
+        libvirt.cpus =  "#{CPUS}".to_i
+        libvirt.memory = "#{MEMORY}".to_i
+      end
+      cfg.vm.network "private_network", ip: "#{P_IP}#{i + 10}"
+      cfg.vm.provision 'file', source: "/root/#{USERPATH}/#{KEY_PAIR_NAME}.pub", destination: "/home/vagrant/authorized_keys"
+      cfg.vm.provision 'shell', path: "/root/vagrantwork/setting/setting.sh" 
+      cfg.vm.provision 'shell', inline: "sudo hostnamectl set-hostname worker#{i}"
+      cfg.vm.provision 'shell', path: "/root/vagrantwork/setting/setssh_default.sh"
+    end
+  end
+
+  config.vm.define "#{VM_NAME}_ansible" do |cfga|
+    cfga.vm.box = "#{IMAGE}"
+    cfga.vm.host_name = "#{VM_NAME}ansible"
+    cfga.vm.network "forwarded_port", guest: 22, host: "#{A_PORT}", auto_correct: true, id: "ssh"
+    cfga.vm.network "private_network", ip: "#{P_IP}9"
+    cfga.vm.provision 'file', source: "/root/#{USERPATH}/#{KEY_PAIR_NAME}", destination: "/home/vagrant/project.pem"
+    cfga.vm.provision 'file', source: "/root/vagrantwork/ansible/set_infra.yml", destination: "/home/vagrant/set_infra.yml"
+    cfga.vm.provision 'shell', path: "/root/vagrantwork/setting/setting_ansible.sh"
+    cfga.vm.provision 'shell', path: "/root/vagrantwork/setting/setssh_ansible.sh", args: "#{P_IP} #{VM_COUNT}"
+  end
+end

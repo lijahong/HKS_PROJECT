@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: default
+              port:
+                number: 80 # 서비스(nodeport)의 포트
+        - path: /shop
+          pathType: Prefix
+          backend:
+            service:
+              name: shop
+              port:
+                number: 80
+        - path: /blog
+          pathType: Prefix
+          backend:
+            service:
+              name: blog
+              port:
+                number: 80

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Checkout example · Bootstrap v5.1</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+
+
+
+    <!-- Bootstrap core CSS -->
+
+
+    <style>
+        /* page-loading */
+  #loading {
+  	width: 100%;
+  	height: 100%;
+  	top: 0;
+  	left: 0;
+  	position: fixed;
+  	display: block;
+  	opacity: 0.6;
+  	background: #e4e4e4;
+  	z-index: 99;
+  	text-align: center;
+  }
+
+  #loading > img {
+  	position: absolute;
+  	top: 36%;
+  	left: 45%;
+  	z-index: 100;
+  }
+   #loading > p {
+    	position: absolute;
+    	top: 54%;
+    	left: 48%;
+    	z-index: 101;
+    }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+</style>
+
+
+    <!-- Custom styles for this template -->
+
+  </head>
+  <body class="bg-light">
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Creation Form</h2>
+      <p class="lead">아래에 내용을 입력해주세요. </p>
+    </div>
+
+    <div class="row g-5">
+
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Create Yourself !</h4>
+        <form class="needs-validation" method="post" novalidate>
+            {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="project_name" class="form-label">Project name</label>
+              <input type="text" class="form-control" id="project_name" name="project_name" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid Project name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="key_pair_name" class="form-label">Key-Pair</label>
+              <input type="text" class="form-control" id="key_pair_name" name="key_pair_name" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Valid Key Pair name is required.
+              </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+              <label for="worker" class="form-label">노드 수 선택</label>
+              <input type="number"  min="1" max="2" class="form-control" id="worker" name="worker" placeholder="" required>
+              <div class="invalid-feedback">
+                required.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+                     <div class="col-sm-6">
+              <label for="flavor" class="form-label">Flavor</label>
+              <select class="form-select" id="flavor" name="flavor" required>1
+                <option value="">Choose...</option>
+                <option value="x1.small">X1.SMALL</option>
+        <option value="x1.medium">X1.MEDIUM</option>
+        <option value="x1.large">X1.LARGE</option>
+              </select>
+              <br>
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="image" class="form-label">Image</label>
+              <select class="form-select" id="image" name="image" required>
+                <option value="">Choose...</option>
+                <option value="centos">CENTOS</option>
+              </select>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+          <hr class="my-4">
+
+          <div id="loading" style="margin-left: 0px;">
+        <img src="https://www.railtrip.co.kr/image/loading2.gif">
+        <p>인스턴스 생성중입니다..</p>
+               </div>
+          <button class="w-100 btn btn-primary btn-lg"  href="/script/create" id="lodingBtn">Continue to Create</button>
+
+            <p style="color:blue">버튼 클릭 후 잠시 대기해주세요. 인스턴스 생성에 시간이 소요 됩니다.</p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#loading').hide();
+    $('#lodingBtn').click(function(){
+        $('#loading').show();
+        return true;
+        });
+    });
+</script>
+

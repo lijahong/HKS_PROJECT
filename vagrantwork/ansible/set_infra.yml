@@ -1,0 +1,25 @@
+---
+- name: 인프라 세팅
+  hosts: master
+  become: no
+  gather_facts: no
+
+  tasks:
+  - name: install shellinabox
+    shell: "yum -y install epel-release ; yum -y install shellinabox"
+  - name: shellinabox start
+    shell: "systemctl start shellinaboxd"
+  - name: install calico
+    shell: "sudo -u vagrant kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml"
+  - name: create metallb workspace
+    shell: "sudo -u vagrant kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml"
+  - name: install metallb
+    shell: "sudo -u vagrant kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml" 
+  - name: metallb secret 
+    shell: "sudo -u vagrant kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey='$(openssl rand -base64 128)'"
+  - name: deploy config 
+    shell: "sudo -u vagrant kubectl apply -f /home/vagrant/lb-config.yml"
+  - name: install ingress controller
+    shell: "sudo -u vagrant kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.2/deploy/static/provider/cloud/deploy.yaml"
+  - name: restart k8s 
+    shell: "sleep 70 ; systemctl restart kubelet"

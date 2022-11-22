@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec: # 아래는 ReplicaSet 설정
+  replicas: 3
+  selector: # 아래의 라벨 개수를 확인해 관리
+    matchLabels:
+      app: webserver
+  template: # 아래는 pod 구성
+    metadata:
+      name: my-webserver
+      labels:
+        app: webserver
+    spec: # 아래 부분은 포드안에 들어가는 컨테이너 구성내용
+      containers:
+      - name: my-webserver
+        image: nginx
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+spec:
+  ports:
+  - name: web-port
+    port: 80
+  selector:
+    app: webserver
+  type: LoadBalancer
