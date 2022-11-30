@@ -25,34 +25,20 @@
 
 ---
 
-## 2. 프로젝트 과정 및 역활
+## 2. 프로젝트 구조와 사용 기술
 
-### 2.1 역활 분담
-
-![](https://velog.velcdn.com/images/lijahong/post/86785745-b4f5-4b2a-b0f3-1dd3db4b9ad9/image.png)
-
-### 2.2 프로젝트 과정
-
-![](https://velog.velcdn.com/images/lijahong/post/1cc574db-d923-404b-8ecc-11b2fd8b0001/image.png)
-
-![](https://velog.velcdn.com/images/lijahong/post/55bc408e-f87b-416c-be90-0890de7ee2ce/image.png)
-
----
-
-## 3. 프로젝트 구조와 사용 기술
-
-### 3.1 사용 기술
+### 2.1 사용 기술
 
 ![](https://velog.velcdn.com/images/lijahong/post/82b90f90-429d-4452-bf60-74759312531a/image.png)
 - 사용하는 기술 스택은 위와 같으며 상세 내용은 아래와 같다
 
 ![](https://velog.velcdn.com/images/lijahong/post/3d71f601-0f9c-444e-b93f-e1172f3ca824/image.png)
 
-### 3.2 기술 선택 이유
+### 2.2 기술 선택 이유
 
 - 클라우드 서비스의 특성 중 하나는 On-Demand 이다. 고객이 서비스를 요청하면 바로 제공해야 합니다. 이때 핵심은 자동화 입니다. 고객은 버튼 클릭 한 번으로 필요한 서비스를 제공 받아야 한다. 따라서 IaC 도구인 Vagrant 와 Ansible 을 통해 해당 서비스를 위한 환경을 자동으로 구축하게 하였다
 
-### 3.3 프로젝트 구조
+### 2.3 프로젝트 구조
 
 ![](https://velog.velcdn.com/images/lijahong/post/17da91b7-8774-46e6-8bac-f99fe6ea2b37/image.png)
 
@@ -64,14 +50,28 @@
 6. 생성된 인스턴스들은 엔서블의 playbook 을 통해 K8S 클러스터링 및 패키지 설치
 7. 사용자는 shellinabox 를 통해 WEB 상에서 Master 노드에 접속
 
-### 3.4 네트워크 구조
+### 2.4 네트워크 구조
 
 ![](https://velog.velcdn.com/images/lijahong/post/fd545bed-154f-4106-883d-bd90d1eaeb80/image.png)
 
-### 3.5 데이터 베이스 모델링
+### 2.5 데이터 베이스 모델링
 
 ![](https://velog.velcdn.com/images/lijahong/post/2c88b269-90ae-47ac-9517-075bec8c5090/image.png)
 
 ---
 
-## 4. 프로젝트 결과
+## 3. 프로젝트 결과
+
+### 3.1 주요 기능
+
+![](https://velog.velcdn.com/images/lijahong/post/5c8362bc-111c-4223-8dab-8a47823fc43c/image.png)
+
+
+### 3.2 Kubernetes Cluster 제공
+
+![](https://velog.velcdn.com/images/lijahong/post/573f083f-2edf-4feb-8884-bc2d61e64a59/image.png)
+
+![](https://velog.velcdn.com/images/lijahong/post/363523d2-1493-4972-8a44-f50868a182c7/image.png)
+
+![](https://velog.velcdn.com/images/lijahong/post/3fcad4c7-2112-4b4f-ad5c-71fa32197ec3/image.png)
+
