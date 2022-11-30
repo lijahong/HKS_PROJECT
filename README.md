@@ -70,8 +70,41 @@
 ### 3.2 Kubernetes Cluster 제공
 
 ![](https://velog.velcdn.com/images/lijahong/post/573f083f-2edf-4feb-8884-bc2d61e64a59/image.png)
+- 사용자는 회원가입 및 로그인 후 인스턴스 요구 사항을 입력할 수 있다
+- 프로젝트 이름, Key-Pair, Worker Node 수, Flavor, Image 를 입력할 수 있다
 
-![](https://velog.velcdn.com/images/lijahong/post/363523d2-1493-4972-8a44-f50868a182c7/image.png)
+![](https://velog.velcdn.com/images/lijahong/post/d9195bb8-5fec-43b2-bc4e-0b15f3e0f49e/image.png)
+- 각 사용자의 디렉토리 안에 프로젝트 디렉토리를 만들어 내부에 프로비저닝을 위한 환경을 준비한다. 이를 위해서 요구 사항을 Vagrant 에서 변수로 인식하게 하는 .env 파일과 SSH 접속을 위한 Key-Pair 가 필요하다
+- 사용자마다 요구 사항이 다르므로, 이를 적용시키기 위해서 Vagrantfile 템플릿을 만들고, 해당 템플릿에 요구 사항을 변수로서 적용시킨다
+- 인스턴스 생성시 Ansible 명령 전달을 위해 Ansible 인스턴스도 생성해주는데, Ansible 명령을 모두 수행하고 나면, 자원 효율을 위해 Ansible 인스턴스는 삭제해준다
 
 ![](https://velog.velcdn.com/images/lijahong/post/3fcad4c7-2112-4b4f-ad5c-71fa32197ec3/image.png)
 
+- 해당 프로젝트에서는 GKE 와 같이 Kubernetes 환경을 제공하는 것이기 때문에, 노드가 생성된 후 Ansible 로 Kubernetes 환경을 설치해주는 것이 아니라 Kubernetes 설치와 클러스터링이 된 상태로 노드가 생성될 수 있도록 프로비저닝 하는 것이 프로젝트의 목적에 더 적합하다고 생각해 Vagrant 에서 Kubernetes 설치를 해 제공하는 것으로 구성하였다
+- IaC 도구를 이용해 자동으로 클러스터링이 된 상태로 Kubetnetes 서비스를 제공한다
+
+![](https://velog.velcdn.com/images/lijahong/post/fe747a36-27e6-46d6-a3e6-ec5d02904728/image.png)
+- Ansible 명령을 통해 Master Node 에서 K8S Cluster kubeadm Token 을 발급하여 Worker Node 들에게 전달해주고, 이를 이용해 해당 Cluster 에 가입하는 것을 자동화 한다
+
+![](https://velog.velcdn.com/images/lijahong/post/cb54f065-504b-42aa-accc-19084343dcb4/image.png)
+- Ansible Playbook 을 통해 필요한 패키지, calico CNI, Ingress, MetalLB 를 설치해준다
+- 온프레미스 환경에서 로드 밸런서 서비스에 External IP 를 자동으로 할당해주기 위해 MetalLB 를 설치해준다. 이때, ConfigMap 역시 배포하여 할당해줄 External IP 의 범위를 지정한다
+
+### 3.3 Shellinabox
+
+![](https://velog.velcdn.com/images/lijahong/post/09608bc1-fb6e-4b24-ac9f-900b7def80b4/image.png)
+- 생성이 완료되면, 원격 Linux 서버에 액세스하기위한 웹 기반 SSH 터미널인 Shellinabox 를 통해 Master Node 에 접속할 수 있다
+
+### 3.4 Kubernetes 사용
+
+![](https://velog.velcdn.com/images/lijahong/post/cc21fdd4-ab41-46f0-b26b-65a5a22fbbc1/image.png)
+- MetalLB 와 Ingress 를 통해 Ingress 배포시 Ingress 의 로드밸런서에 External IP 가 할당된다
+
+![](https://velog.velcdn.com/images/lijahong/post/040a3d35-a39a-4c7f-99d9-2ccea42e2e5e/image.png)
+- cAdvisor, Node-Exporter, Prometheus, Grafana 를 Container 로 배포하여 모니터링 환경을 구축 가능하다
+
+![](https://velog.velcdn.com/images/lijahong/post/f5a74a70-b689-4d25-8503-a463f97aa196/image.png)
+- 동적 프로비저너를 배포하여 사용 가능하다. 이때 Stoarge Node 와 Control Node 를 NFS 로 Mount 시키고, Mount 된 Control 의 디렉토리를 동적 프로비저너에서 사용하게 지정한다
+
+![](https://velog.velcdn.com/images/lijahong/post/653c22b0-882c-4c6b-8b77-c4f75c99b254/image.png)
+- PVC 를 배포하면, 요구하는 스펙에 맞는 PV 가 생성되어 Bound 된다. 이때, 해당 PV 에 데이터를 저장하면, 실제 데이터는 NFS-SERVER 인 Storage Node 에 저장된다
