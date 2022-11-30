@@ -37,10 +37,6 @@
 
 ![](https://velog.velcdn.com/images/lijahong/post/55bc408e-f87b-416c-be90-0890de7ee2ce/image.png)
 
-### 2.3 타임 라인
-
-![](https://velog.velcdn.com/images/lijahong/post/a064b3b4-f971-462c-bd6b-d6e3ea9c67be/image.png)
-
 ---
 
 ## 3. 프로젝트 구조와 사용 기술
