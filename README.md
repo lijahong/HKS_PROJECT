@@ -62,6 +62,8 @@
 
 ## 3. 프로젝트 결과
 
+#### [시연 영상 링크](https://www.youtube.com/watch?v=8vrlsrU0cTk&t=57s&ab_channel=TheHong)
+
 ### 3.1 주요 기능
 
 ![](https://velog.velcdn.com/images/lijahong/post/5c8362bc-111c-4223-8dab-8a47823fc43c/image.png)
@@ -140,5 +142,3 @@
 ### 4.4 프로젝트에서 느낀점
 
 - 해당 프로젝트를 통해 Kubernetes 서비스를 제공하는 환경을 만들며 전체적인 인프라를 이해할 수 있었고, Kubernetes 클러스터링과 자동화등을 경험하며 클라우드 엔지니어 직무에 더욱 흥미가 생겼다
-
-![](https://velog.velcdn.com/images/lijahong/post/67333302-32c5-4c35-ac1c-fd5fe861a332/image.png)
