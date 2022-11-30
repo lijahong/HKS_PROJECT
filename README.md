@@ -1,7 +1,7 @@
 # KUBERNETES_UKS_PROJECT
 
 #### Kubernetes & Vagrant & Ansible & KVM 을 이용한 Team 프로젝트
-#### Urusa Kubernetes engine Service - 온프레미스 환경에서 WEB 기반의 사용자 맞춤형 쿠버네티스 클러스터 제공 서비스
+#### Urusa Kubernetes engine Service 는 온프레미스 환경에서 WEB 기반의 사용자 맞춤형 쿠버네티스 클러스터 제공 서비스 이다
 - vagrant work : Vagrant & Shell & Ansible & Kubernetes 파일
 - k8s-toy-project-web-main : Django 를 이용한 Web 파일
 
@@ -34,23 +34,29 @@
 ### 2.2 프로젝트 과정
 
 ![](https://velog.velcdn.com/images/lijahong/post/1cc574db-d923-404b-8ecc-11b2fd8b0001/image.png)
-![업로드중..](blob:https://velog.io/64e89b8f-2404-4af1-a9f0-60cd94b8afba)
-![업로드중..](blob:https://velog.io/871ff81e-e84c-49ac-9a7d-61440f77b7e8)
 
-## 2. 프로젝트 구조와 사용 기술
+![](https://velog.velcdn.com/images/lijahong/post/55bc408e-f87b-416c-be90-0890de7ee2ce/image.png)
 
-### 2.1 사용 기술
+### 2.3 타임 라인
+
+![](https://velog.velcdn.com/images/lijahong/post/a064b3b4-f971-462c-bd6b-d6e3ea9c67be/image.png)
+
+---
+
+## 3. 프로젝트 구조와 사용 기술
+
+### 3.1 사용 기술
 
 ![](https://velog.velcdn.com/images/lijahong/post/82b90f90-429d-4452-bf60-74759312531a/image.png)
 - 사용하는 기술 스택은 위와 같으며 상세 내용은 아래와 같다
 
 ![](https://velog.velcdn.com/images/lijahong/post/3d71f601-0f9c-444e-b93f-e1172f3ca824/image.png)
 
-### 2.2 기술 선택 이유
+### 3.2 기술 선택 이유
 
 - 클라우드 서비스의 특성 중 하나는 On-Demand 이다. 고객이 서비스를 요청하면 바로 제공해야 합니다. 이때 핵심은 자동화 입니다. 고객은 버튼 클릭 한 번으로 필요한 서비스를 제공 받아야 한다. 따라서 IaC 도구인 Vagrant 와 Ansible 을 통해 해당 서비스를 위한 환경을 자동으로 구축하게 하였다
 
-### 2.3 프로젝트 구조
+### 3.3 프로젝트 구조
 
 ![](https://velog.velcdn.com/images/lijahong/post/17da91b7-8774-46e6-8bac-f99fe6ea2b37/image.png)
 
@@ -62,10 +68,14 @@
 6. 생성된 인스턴스들은 엔서블의 playbook 을 통해 K8S 클러스터링 및 패키지 설치
 7. 사용자는 shellinabox 를 통해 WEB 상에서 Master 노드에 접속
 
-### 2.4 네트워크 구조
+### 3.4 네트워크 구조
 
 ![](https://velog.velcdn.com/images/lijahong/post/fd545bed-154f-4106-883d-bd90d1eaeb80/image.png)
 
-### 2.5 데이터 베이스 모델링
+### 3.5 데이터 베이스 모델링
 
 ![](https://velog.velcdn.com/images/lijahong/post/2c88b269-90ae-47ac-9517-075bec8c5090/image.png)
+
+---
+
+## 4. 프로젝트 결과
