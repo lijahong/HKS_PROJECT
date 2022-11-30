@@ -108,3 +108,37 @@
 
 ![](https://velog.velcdn.com/images/lijahong/post/653c22b0-882c-4c6b-8b77-c4f75c99b254/image.png)
 - PVC 를 배포하면, 요구하는 스펙에 맞는 PV 가 생성되어 Bound 된다. 이때, 해당 PV 에 데이터를 저장하면, 실제 데이터는 NFS-SERVER 인 Storage Node 에 저장된다
+
+### 3.5 Delete
+
+![](https://velog.velcdn.com/images/lijahong/post/6d14e238-cd9f-4c91-8e2a-62417c90ce84/image.png)
+
+---
+
+## 4. 프로젝트 소감
+
+### 4.1 프로젝트 수행상 어려움 극복 사례
+
+- 네트워크를 설정하면서 브릿지로 IP를 받아와서 공인 Ip 를 할당하고자 했지만, 실습 환경 공유기의 DHCP 설정이 되지 않았다. 이를 가상 NAT 네트워크의 Virtio 브릿지를 이용하여 해결하였다. 
+
+- Vagrant에서 K8S를 설치하는 부분에 있어서 많은 오류가 발생했다. Shell에서 직접 코드를 작성해서 하면 실행이 되지만, 같은 코드를 Vagrantfile에서 실행 할 때 에러가 발생했다. 명령어들을 작성한 Shell 을 작성한 후 Vagrantfile에서 Shell 을 수행하도록 하여 해당 에러를 해결했다
+
+- 인터페이스 설정 파일의 백업본이 인터페이스 파일과 같은 위치에 .backup 형식으로 있어서 해당 인터페이스를 인식 못하는 문제가 발생했다. 이를 다른 경로에 옮겨 둔 후 진행하여 문제를 해결했다
+
+- 사용자가 Master Node 에 접속시 root 가 아닌 vagrant 계정으로 접속한다. 따라서 Kubernetes 사용 권한을 root 가 아닌 vagrant 에게 주어야 한다. 이를 해결하기 위해 Ansible 로 명령 전달시 u 옵션을 통해 명령을 실행할 계정을 지정하여 해당 문제를 해결했다
+
+### 4.2 프로젝트에서 잘한 부분
+
+- WEB 상에서 사용자의 요구 사항을 Shell 과 Vagrant 를 활용하여 자동으로 프로비저닝 함으로써 사용자가 원하는 Kubernetes 서비스를 적절하게 제공할 수 있었다
+
+- Vagrant 와 Ansible 을 활용하여 프로비저닝 및 환경 구성하는 상황에서 권환 관련 오류 및 네트워크 관련 오류에 적절한 대처를 통해 해결할 수 있었다
+
+### 4.3 프로젝트에서 아쉬운 부분
+
+![](https://velog.velcdn.com/images/lijahong/post/55bdb9f4-5d16-4e1d-94ca-61c4d8d1be08/image.png)
+
+### 4.4 프로젝트에서 느낀점
+
+- 해당 프로젝트를 통해 Kubernetes 서비스를 제공하는 환경을 만들며 전체적인 인프라를 이해할 수 있었고, Kubernetes 클러스터링과 자동화등을 경험하며 클라우드 엔지니어 직무에 더욱 흥미가 생겼다
+
+![](https://velog.velcdn.com/images/lijahong/post/67333302-32c5-4c35-ac1c-fd5fe861a332/image.png)
