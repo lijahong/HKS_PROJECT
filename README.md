@@ -62,7 +62,7 @@
 
 ## 3. 프로젝트 결과
 
-#### [시연 영상 링크](https://www.youtube.com/watch?v=8vrlsrU0cTk&t=57s&ab_channel=TheHong)
+#### [시연 영상 링크](https://www.youtube.com/watch?v=embRBunAB4s&ab_channel=TheHong)
 
 ### 3.1 주요 기능
 
