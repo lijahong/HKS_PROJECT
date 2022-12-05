@@ -52,7 +52,7 @@
 
 ### 2.4 네트워크 구조
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be7fc744-5808-416c-b214-6bb098545f0d/Untitled.png)
+![](https://velog.velcdn.com/images/lijahong/post/59acc736-29ac-403e-bd69-ca4abce613c9/image.png)
 
 ### 2.5 데이터 베이스 모델링
 
