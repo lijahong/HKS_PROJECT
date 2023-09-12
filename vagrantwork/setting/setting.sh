@@ -21,15 +21,16 @@ sudo yum clean all
 sudo yum -y makecache
 
 # package install and update
-yum -y install ca-certificates openssl nss
 yum -y update
-# Add Docker’s official GPG key
-curl -4fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+yum -y install ca-certificates openssl nss
 
 # ssh install
 sudo yum -y install openssh-server
 sudo systemctl enable sshd
 sudo systemctl start sshd
+
+# Add Docker’s official GPG key
+curl -4fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # Extras 저장소 활성화
 sudo yum-config-manager --enable extras
