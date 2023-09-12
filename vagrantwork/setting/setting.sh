@@ -16,16 +16,15 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-# package install and update
-yum -y install ca-certificates openssl nss
-yum -y update
-yum -y install vim
-# Add Docker’s official GPG key
-curl -4fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
 # 패키지 캐시 업데이트
 sudo yum clean all
 sudo yum -y makecache
+
+# package install and update
+yum -y install ca-certificates openssl nss
+yum -y update
+# Add Docker’s official GPG key
+curl -4fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 # ssh install
 sudo yum -y install openssh-server
