@@ -16,9 +16,7 @@ EOF
 sysctl --system
 
 # package install and update
-yum -y install ca-certificates openssl nss
 yum -y update
-yum -y install vim
 
 # Add Docker’s official GPG key
 curl -4fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
